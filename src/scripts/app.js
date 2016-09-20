@@ -2,14 +2,27 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Backbone from 'backbone'
 import init from './init'
+import HomeView from './homeView'
 
 
 const app = function() {
-  document.querySelector('.container').innerHTML = "<h1>Woah!</h1>"
+	 const AppRouter = Backbone.Router.extend({
+	    routes: {
+	      "*catchall": "handleHome"
+	    },
+	    handleHome: function(){
+	      ReactDOM.render(<HomeView />, document.querySelector('.container'))
+	    },
+
+	    initialize: function(){
+	        Backbone.history.start()
+	    }
+	 })
+	 
+	 new AppRouter()
 }
 
-// x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..
-// NECESSARY FOR USER FUNCTIONALITY. DO NOT CHANGE. 
+// x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x.. 
 export const app_name = init()
 app()
 // x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..

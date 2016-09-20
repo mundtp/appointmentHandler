@@ -2,21 +2,14 @@ const mongoose = require('mongoose');
 const createModel = mongoose.model.bind(mongoose);
 const Schema = mongoose.Schema;
 
-// ----------------------
-// USERS
-// ----------------------
-const usersSchema = new Schema({
-  // required for authentication: DO NOT TOUCH Or You May Get Punched
-  email:     { type: String, required: true },
-  password:  { type: String, required: true },
-  // x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x
-  
-   // example of optional fields
-  name:      { type: String },
-  createdAt: { type: Date, default: Date.now }
 
+const appointmentSchema = new Schema ({ // establish the properties that we will use for the data
+    date: {type: String, required: true},
+    time: {type: String, required: true},
+    description: {type: String, required: true},
+    tags: {type: [String], default: []},
 })
 
 module.exports = {
-  User: createModel('User', usersSchema)
+  Appointment: createModel('Appointment', appointmentSchema)
 }
